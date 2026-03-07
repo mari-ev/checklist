@@ -65,3 +65,13 @@ class TestBooksCollector:
         collector.set_book_genre("Зелёная миля", "Классика")
         result = collector.get_books_with_specific_genre("Фантастика")
         assert result == ["Тёмная башня"]
+
+    def test_get_books_for_children(self):
+        collector = BooksCollector()
+        collector.add_new_book("Куджо")
+        collector.set_book_genre("Куджо", "Мультфильмы")
+        collector.add_new_book("Оно")
+        collector.set_book_genre("Оно", "Ужасы")
+        result = collector.get_books_for_children()
+        assert "Куджо" in result
+        assert "Оно" not in result
