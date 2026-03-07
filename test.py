@@ -23,9 +23,21 @@ class TestBooksCollector:
 
     # напиши свои тесты ниже
     # чтобы тесты были независимыми в каждом из них создавай отдельный экземпляр класса BooksCollector()
-    
+
     def test_add_new_book_valid_name(self):
-    collector = BooksCollector()
-    collector.add_new_book("Сияние")
-    assert "Сияние" in collector.books_genre
-    assert collector.books_genre["Сияние"] == ""
+        collector = BooksCollector()
+        collector.add_new_book("Сияние")
+        assert "Сияние" in collector.books_genre
+        assert collector.books_genre["Сияние"] == ""
+
+    @pytest.mark.parametrize(
+        "book_name",
+        [
+            "a" * 41,
+            "",
+        ],
+    )
+    def test_add_new_book_invalid_name(self, book_name):
+        collector = BooksCollector()
+        collector.add_new_book(book_name)
+        assert book_name not in collector.books_genre
