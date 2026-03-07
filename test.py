@@ -56,3 +56,12 @@ class TestBooksCollector:
         collector.add_new_book(book_name)
         collector.set_book_genre(book_name, "Романтика")
         assert collector.get_book_genre(book_name) == ""
+
+    def test_get_books_with_specific_genre(self):
+        collector = BooksCollector()
+        collector.add_new_book("Тёмная башня")
+        collector.set_book_genre("Тёмная башня", "Фэнтези")
+        collector.add_new_book("Зелёная миля")
+        collector.set_book_genre("Зелёная миля", "Классика")
+        result = collector.get_books_with_specific_genre("Фэнтези")
+        assert result == ["Тёмная башня"]
