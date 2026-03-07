@@ -82,3 +82,12 @@ class TestBooksCollector:
         collector.add_new_book(book_name)
         result = collector.get_books_for_children()
         assert book_name not in result
+
+    def test_get_books_for_children_all_books_have_adult_genres(self):
+        collector = BooksCollector()
+        collector.add_new_book("Оно")
+        collector.set_book_genre("Оно", "Ужасы")
+        collector.add_new_book("Шерлок Холмс")
+        collector.set_book_genre("Шерлок Холмс", "Детективы")
+        result = collector.get_books_for_children()
+        assert result == []
