@@ -91,3 +91,10 @@ class TestBooksCollector:
         collector.set_book_genre("Шерлок Холмс", "Детективы")
         result = collector.get_books_for_children()
         assert result == []
+
+    def test_add_book_in_favorites(self):
+        collector = BooksCollector()
+        book_name = "Противостояние"
+        collector.add_new_book(book_name)
+        collector.add_book_in_favorites(book_name)
+        assert book_name in collector.get_list_of_favorites_books()
