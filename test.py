@@ -98,3 +98,10 @@ class TestBooksCollector:
         collector.add_new_book(book_name)
         collector.add_book_in_favorites(book_name)
         assert book_name in collector.get_list_of_favorites_books()
+
+    def test_no_duplicates_in_collection(self):
+        collector = BooksCollector()
+        book_name = "Воспламеняющая взглядом"
+        collector.add_new_book(book_name)
+        collector.add_new_book(book_name)
+        assert list(collector.books_genre.keys()).count(book_name) == 1
