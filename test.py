@@ -60,8 +60,8 @@ class TestBooksCollector:
     def test_get_books_with_specific_genre(self):
         collector = BooksCollector()
         collector.add_new_book("Тёмная башня")
-        collector.set_book_genre("Тёмная башня", "Фэнтези")
+        collector.set_book_genre("Тёмная башня", "Фантастика")
         collector.add_new_book("Зелёная миля")
         collector.set_book_genre("Зелёная миля", "Классика")
-        result = collector.get_books_with_specific_genre("Фэнтези")
+        result = collector.get_books_with_specific_genre("Фантастика")
         assert result == ["Тёмная башня"]
