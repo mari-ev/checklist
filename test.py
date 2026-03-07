@@ -75,3 +75,10 @@ class TestBooksCollector:
         result = collector.get_books_for_children()
         assert "Куджо" in result
         assert "Оно" not in result
+
+    def test_get_books_for_children_book_with_no_genre(self):
+        collector = BooksCollector()
+        book_name = "Книга без жанра"
+        collector.add_new_book(book_name)
+        result = collector.get_books_for_children()
+        assert book_name not in result
