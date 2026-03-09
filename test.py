@@ -105,3 +105,38 @@ class TestBooksCollector:
         collector.add_new_book(book_name)
         collector.add_new_book(book_name)
         assert list(collector.books_genre.keys()).count(book_name) == 1
+
+    def test_get_books_genre(self):
+        collector = BooksCollector()
+        collector.add_new_book("Тёмная башня")
+        collector.set_book_genre("Тёмная башня", "Фантастика")
+        expected = {"Тёмная башня": "Фантастика"}
+        assert collector.get_books_genre() == expected
+        empty_collector = BooksCollector()
+        assert empty_collector.get_books_genre() == {}
+
+    def test_get_book_genre(self):
+        collector = BooksCollector()
+        book_name = "Оно"
+        collector.add_new_book(book_name)
+        assert collector.get_book_genre(book_name) == ""
+        collector.set_book_genre(book_name, "Ужасы")
+        assert collector.get_book_genre(book_name) == "Ужасы"
+        assert collector.get_book_genre("Неизвестная книга") is None
+
+    def test_get_list_of_favorites_books(self):
+        collector = BooksCollector()
+        assert collector.get_list_of_favorites_books() == []
+        collector.add_new_book("Противостояние")
+        collector.add_book_in_favorites("Противостояние")
+        assert "Противостояние" in collector.get_list_of_favorites_books()
+
+    def test_delete_book_from_favorites(self):
+        collector = BooksCollector()
+        book = "Противостояние"
+        collector.add_new_book(book)
+        collector.add_book_in_favorites(book)
+        collector.delete_book_from_favorites(book)
+        assert book not in collector.get_list_of_favorites_books()
+        collector.delete_book_from_favorites("Неизвестная книга")
+        assert collector.get_list_of_favorites_books() == []
